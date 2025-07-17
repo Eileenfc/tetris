@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Estilos específicos para el juego de Tetris */
+.tetris-cell {
+  transition: all 0.1s ease-in-out;
+}
+
+.tetris-cell:hover {
+  transform: scale(1.05);
+}
+
+/* Animaciones para cuando se completan líneas */
+@keyframes lineComplete {
+  0% { background-color: white; transform: scaleX(1); }
+  50% { background-color: yellow; transform: scaleX(1.1); }
+  100% { background-color: transparent; transform: scaleX(0); }
+}
+
+.line-complete {
+  animation: lineComplete 0.5s ease-in-out;
+}
+
+/* Efecto de glow para el tablero */
+.tetris-board {
+  box-shadow: 
+    0 0 20px rgba(59, 130, 246, 0.3),
+    0 0 40px rgba(59, 130, 246, 0.2),
+    0 0 60px rgba(59, 130, 246, 0.1);
+}
+
+/* Animación para el game over */
+@keyframes gameOverPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.game-over-animation {
+  animation: gameOverPulse 2s infinite;
+}
+
+/* Responsividad mejorada */
+@media (max-width: 768px) {
+  .tetris-cell {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .preview-cell {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+}
+
+/* Efectos de hover para botones */
+.control-button {
+  transition: all 0.2s ease-in-out;
+}
+
+.control-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.control-button:active {
+  transform: translateY(0);
+}
+
+/* Efecto de partículas para líneas completadas */
+@keyframes sparkle {
+  0% { opacity: 1; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+  100% { opacity: 0; transform: scale(0) rotate(360deg); }
+}
+
+.sparkle {
+  animation: sparkle 1s ease-in-out;
+}
