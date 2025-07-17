@@ -26,12 +26,12 @@ const ControlButton: React.FC<ControlButtonProps> = ({
   variant = 'secondary',
   disabled = false 
 }) => {
-  const baseClasses = "w-full px-4 py-3 rounded-lg font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-center";
+  const baseClasses = "w-full px-4 py-3 rounded-lg font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-center text-sm sm:text-base min-h-[48px] flex items-center justify-center";
   
   const variantClasses = {
-    primary: "bg-blue-600 hover:bg-blue-700 text-white",
-    secondary: "bg-gray-600 hover:bg-gray-700 text-white",
-    danger: "bg-red-600 hover:bg-red-700 text-white"
+    primary: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02]",
+    secondary: "bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02]",
+    danger: "bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg hover:shadow-xl transform hover:scale-[1.02]"
   };
   
   return (
@@ -56,10 +56,10 @@ export const GameControls: React.FC<GameControlsProps> = ({
   onToggleMute
 }) => {
   return (
-    <div className="bg-gray-800 p-4 rounded-lg border border-gray-600">
-      <h3 className="text-white text-lg font-bold mb-4 text-center">Controles</h3>
+    <div className="bg-gray-800 p-4 rounded-lg border border-gray-600 shadow-xl">
+      <h3 className="text-white text-lg font-bold mb-4 text-center">🎮 Controles</h3>
       
-      <div className="flex flex-col gap-3">
+      <div className="space-y-3">
         {isGameOver ? (
           <ControlButton onClick={onStart} variant="primary">
             🎮 Nueva Partida
@@ -90,36 +90,35 @@ export const GameControls: React.FC<GameControlsProps> = ({
       
       {/* Instrucciones de controles */}
       <div className="mt-6 space-y-3">
-        <h4 className="text-gray-300 text-sm font-semibold">Controles del Teclado:</h4>
+        <h4 className="text-gray-300 text-sm font-semibold flex items-center gap-2">
+          <span>⌨️</span>
+          Controles del Teclado:
+        </h4>
         
-        <div className="space-y-2 text-xs">
-          <div className="flex justify-between text-gray-400">
+        <div className="grid grid-cols-2 gap-2 text-xs">
+          <div className="flex justify-between text-gray-400 bg-gray-900/50 p-2 rounded">
             <span>Mover:</span>
-            <span>← → A D</span>
+            <span className="font-mono">← → A D</span>
           </div>
-          <div className="flex justify-between text-gray-400">
+          <div className="flex justify-between text-gray-400 bg-gray-900/50 p-2 rounded">
             <span>Bajar:</span>
-            <span>↓ S</span>
+            <span className="font-mono">↓ S</span>
           </div>
-          <div className="flex justify-between text-gray-400">
+          <div className="flex justify-between text-gray-400 bg-gray-900/50 p-2 rounded">
             <span>Rotar:</span>
-            <span>↑ W</span>
+            <span className="font-mono">↑ W</span>
           </div>
-          <div className="flex justify-between text-gray-400">
+          <div className="flex justify-between text-gray-400 bg-gray-900/50 p-2 rounded">
             <span>Caída rápida:</span>
-            <span>Espacio</span>
+            <span className="font-mono">Espacio</span>
           </div>
-          <div className="flex justify-between text-gray-400">
-            <span>Guardar pieza:</span>
-            <span>C</span>
+          <div className="flex justify-between text-gray-400 bg-gray-900/50 p-2 rounded">
+            <span>Guardar:</span>
+            <span className="font-mono">C</span>
           </div>
-          <div className="flex justify-between text-gray-400">
+          <div className="flex justify-between text-gray-400 bg-gray-900/50 p-2 rounded">
             <span>Pausar:</span>
-            <span>P Esc</span>
-          </div>
-          <div className="flex justify-between text-gray-400">
-            <span>Reiniciar:</span>
-            <span>R</span>
+            <span className="font-mono">P Esc</span>
           </div>
         </div>
       </div>

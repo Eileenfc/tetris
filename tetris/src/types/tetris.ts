@@ -31,7 +31,7 @@ export interface GameStats {
   time: number;
 }
 
-export const BOARD_WIDTH = 10;
+export const BOARD_WIDTH = 14;
 export const BOARD_HEIGHT = 20;
 export const PREVIEW_SIZE = 4;
 
@@ -95,7 +95,7 @@ export const TETROMINO_SHAPES = {
 };
 
 export const COLORS = {
-  0: 'bg-gray-900', // Vacío
+  0: 'bg-gray-900/80', // Vacío - con líneas guía visibles
   1: 'bg-cyan-400',   // I
   2: 'bg-yellow-400', // O
   3: 'bg-purple-500', // T

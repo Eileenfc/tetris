@@ -16,15 +16,20 @@ interface CellProps {
 }
 
 const Cell: React.FC<CellProps> = ({ type, isGhost = false }) => {
-  const baseClasses = "w-6 h-6 border border-gray-700 transition-all duration-150";
+  const baseClasses = "w-7 h-7 transition-all duration-150";
   const colorClass = COLORS[type as keyof typeof COLORS] || COLORS[0];
   const ghostClass = isGhost ? "opacity-30" : "";
   
+  // Solo agregar borde sutil a las celdas vacías para las líneas guía
+  const borderClass = type === 0 ? "border border-gray-700/20" : "";
+  
   return (
     <div 
-      className={`${baseClasses} ${colorClass} ${ghostClass}`}
+      className={`${baseClasses} ${colorClass} ${ghostClass} ${borderClass}`}
       style={{
-        boxShadow: type !== 0 && !isGhost ? 'inset -2px -2px 4px rgba(0,0,0,0.3), inset 2px 2px 4px rgba(255,255,255,0.1)' : 'none'
+        boxShadow: type !== 0 && !isGhost ? 'inset -2px -2px 4px rgba(0,0,0,0.3), inset 2px 2px 4px rgba(255,255,255,0.1)' : 'none',
+        margin: 0,
+        padding: 0
       }}
     />
   );
@@ -69,12 +74,16 @@ export const Board: React.FC<BoardProps> = ({
   }
   
   return (
-    <div className="bg-gray-900 p-2 rounded-lg border-2 border-gray-600">
+    <div className="bg-gray-900 p-2 rounded-lg border-2 border-gray-600 w-fit">
       <div 
-        className="grid gap-px bg-gray-800 p-1 rounded"
+        className="grid bg-gray-900 rounded overflow-hidden"
         style={{ 
-          gridTemplateColumns: `repeat(${board[0]?.length || 10}, minmax(0, 1fr))`,
-          gridTemplateRows: `repeat(${board.length}, minmax(0, 1fr))`
+          gridTemplateColumns: `repeat(${board[0]?.length || 10}, 28px)`,
+          gridTemplateRows: `repeat(${board.length}, 28px)`,
+          gap: 0,
+          lineHeight: 0,
+          width: `${(board[0]?.length || 10) * 28}px`,
+          height: `${board.length * 28}px`
         }}
       >
         {renderBoard.map((row, y) =>
